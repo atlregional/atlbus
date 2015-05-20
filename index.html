@@ -3,24 +3,42 @@
   <head>
     <meta charset="utf-8">
     <title>A Gentle Introduction</title>
-
+    <style type="text/css">
+      body {
+          margin: 0;
+      }
+    </style>
     <script
-      src="https://rawgit.com/flatiron/director/master/build/director.min.js">
+      src="director.min.js">
     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
     <script>
-      var author = function () { console.log("author"); };
-      var books = function () { console.log("books"); };
-      var viewBook = function (bookId) {
-        console.log("viewBook: bookId is populated: " + bookId);
+      // var author = function () { console.log("author"); };
+      // var books = function () { console.log("books"); };
+      var viewStop = function (stopId) {
+        $(document).ready(function() {
+          console.log("viewBook: stopId is populated: " + stopId);
+          var url = 'http://onebusaway.gatech.edu/where/text/stop.action?id=MARTA_' + stopId;
+          $('#stop-frame').attr('src', url);
+        });
+        
+        // var div = document.createElement('iframe');
+        
+        // div.src = src;
+        // document.body.appendChild(div);
+        // var iframe = '<iframe src="' + url + '"></iframe>';
+        // $('#main').html(iframe);
+        
+
       };
 
       var routes = {
-        '/author': author,
-        '/books': [books, function() {
-          console.log("An inline route handler.");
-        }],
-        '/books/view/:bookId': viewBook
+        // '/author': author,
+        // '/books': [books, function() {
+        //   console.log("An inline route handler.");
+        // }],
+        '/:stopId': viewStop
       };
 
       var router = Router(routes);
@@ -30,10 +48,11 @@
   </head>
 
   <body>
-    <ul>
+    <iframe id="stop-frame" style="position:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;"></iframe>
+    <!-- <ul>
       <li><a href="#/author">#/author</a></li>
       <li><a href="#/books">#/books</a></li>
       <li><a href="#/books/view/1">#/books/view/1</a></li>
-    </ul>
+    </ul> -->
   </body>
 </html>
