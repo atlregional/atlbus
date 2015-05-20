@@ -19,7 +19,7 @@
       var viewStop = function (stopId) {
         $(document).ready(function() {
           console.log("viewBook: stopId is populated: " + stopId);
-          var url = 'http://onebus.atlregion.com/where/text/stop.action?id=MARTA_' + stopId;
+          var url = 'http://onebus.atlantaregion.com/where/text/stop.action?id=MARTA_' + stopId;
           $('#stop-frame').attr('src', url);
         });
         
@@ -48,7 +48,7 @@
   </head>
 
   <body>
-    <iframe id="stop-frame" src="http://onebus.atlregion.com/where/text/" style="position:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;"></iframe>
+    <iframe id="stop-frame" src="http://onebus.atlantaregion.com/where/text/" style="position:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;"></iframe>
     <!-- <ul>
       <li><a href="#/author">#/author</a></li>
       <li><a href="#/books">#/books</a></li>
