@@ -18,9 +18,16 @@
       // var books = function () { console.log("books"); };
       var viewStop = function (stopId) {
         $(document).ready(function() {
-          console.log("viewBook: stopId is populated: " + stopId);
-          var url = 'http://onebus.atlantaregion.com/where/text/stop.action?id=MARTA_' + stopId;
-          $('#stop-frame').attr('src', url);
+          // parse id for length
+
+          // if length =< 3 than search for route
+          // http://atlanta.onebusaway.org/api/api/where/routes-for-location.xml?key=TEST&lat=47.653435&lon=-122.305641
+
+          // else search for stop
+
+          // console.log("viewBook: stopId is populated: " + stopId);
+          var stop = queryStop(stopId);
+          
         });
         
         // var div = document.createElement('iframe');
@@ -44,6 +51,27 @@
       var router = Router(routes);
 
       router.init();
+      function queryStop(stopId){
+        var url = 'http://atlanta.onebusaway.org/api/api/where/stops-for-location.json?lat=33.7594&lon=-84.3900&radius=40000&version=2&key=TEST&query=' + stopId;
+        $.ajax({
+          type: "GET",
+          url: url,
+          contentType: "application/json; charset=utf-8",
+          dataType: 'jsonp',
+          ProcessData: true,
+          success: function(res){
+            console.log(res)
+            var stop;
+            if (res.data.list.length > 0){
+              stop = res.data.list[0];
+              var url = 'http://atlanta.onebusaway.org/where/text/stop.action?id=' + stop.id;
+              $('#stop-frame').attr('src', url);
+              return stop;
+            }
+            // parseTime(stop.name, data.data.entry.arrivalsAndDepartures)
+          }
+        });
+      }
     </script>
   </head>
 
